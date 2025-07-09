@@ -1,0 +1,6 @@
+{
+  "name": "Social Media Poster Designer",
+  "description": "A web application to design social media posters. Users can upload a background image, add and edit text, and place logos. The final design can be downloaded as an image.",
+  "requestFramePermissions": [],
+  "prompt": ""
+}
