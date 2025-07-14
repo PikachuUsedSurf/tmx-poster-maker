@@ -48,7 +48,7 @@ const PosterCanvas: React.FC<PosterState> = ({
         <div className="w-1/4 flex justify-start">
           {topLeftLogo && <img src={topLeftLogo} alt="Top Left Logo" className="max-h-[60px] w-auto" crossOrigin="anonymous" />}
         </div>
-        <div className="w-1/2 text-center font-bold text-black font-semibold text-sm leading-tight whitespace-pre-wrap">
+        <div className="w-1/2 text-center font-bold text-black text-lg leading-tight whitespace-pre-wrap">
           {topText}
         </div>
         <div className="w-1/4 flex justify-end">
@@ -76,7 +76,7 @@ const PosterCanvas: React.FC<PosterState> = ({
       
       {/* Footer Logos - Positioned Absolutely */}
       <footer 
-          className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-8 px-10 py-4 shadow-lg z-10"
+          className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-24 px-10 py-4 shadow-lg z-10"
           style={{ backgroundColor: headerFooterBackgroundColor }}
       >
           {footerLogos.map((logo, index) => (
