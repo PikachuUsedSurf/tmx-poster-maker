@@ -45,7 +45,9 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onApplyContent }) =
 
     const handleApply = () => {
         if(generated) {
-            onApplyContent(generated);
+            // Destructure to exclude footerLogos from the object passed to onApplyContent
+            const { footerLogos, ...contentToApply } = generated;
+            onApplyContent(contentToApply);
             alert('Content applied to poster!');
         }
     };

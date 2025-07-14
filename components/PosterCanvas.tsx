@@ -48,7 +48,7 @@ const PosterCanvas: React.FC<PosterState> = ({
         <div className="w-1/4 flex justify-start">
           {topLeftLogo && <img src={topLeftLogo} alt="Top Left Logo" className="max-h-[60px] w-auto" crossOrigin="anonymous" />}
         </div>
-        <div className="w-1/2 text-center font-semibold text-sm leading-tight whitespace-pre-wrap">
+        <div className="w-1/2 text-center font-bold text-black font-semibold text-sm leading-tight whitespace-pre-wrap">
           {topText}
         </div>
         <div className="w-1/4 flex justify-end">
@@ -60,16 +60,16 @@ const PosterCanvas: React.FC<PosterState> = ({
       <main className="relative w-full h-full flex flex-col justify-center items-start z-0 px-10 box-border pt-[120px] pb-[120px]">
           {/* This container preserves the inner layout of the text and date circle */}
           <div className="relative w-full flex-grow flex flex-col justify-center items-start">
-            <div className="absolute top-0 left-0 -translate-y-1/3 z-20">
+            <div className="absolute top-0 left-0 translate-y-1/2 z-20">
               <div className="bg-[#009A9A] rounded-full w-[200px] h-[200px] flex flex-col justify-center items-center text-center p-4 shadow-lg">
                 <span className="text-lg font-medium">{dateCircle.topText}</span>
                 <span className="text-7xl font-bold leading-none my-1">{dateCircle.mainText}</span>
                 <span className="text-lg font-medium whitespace-pre-wrap">{dateCircle.bottomText}</span>
               </div>
             </div>
-            <div className="pl-[10px] pt-[150px] w-full">
+            <div className="pl-[10px] pt-[300px] w-full">
               <h1 className="text-8xl font-extrabold tracking-wider">{heading}</h1>
-              <p className="mt-4 text-lg max-w-3xl whitespace-pre-wrap leading-relaxed">{paragraph}</p>
+              <p className="mt-6 text-2xl text-justify max-w-4xl whitespace-pre-wrap leading-relaxed">{paragraph}</p>
             </div>
           </div>
       </main>

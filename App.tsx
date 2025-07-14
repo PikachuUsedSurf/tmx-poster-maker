@@ -18,7 +18,7 @@ const App: React.FC = () => {
       objectPosition: 'center center',
     },
     backgroundOverlayColor: "rgba(0, 77, 77, 0.7)",
-    headerFooterBackgroundColor: "#0000004D", // 30% black
+    headerFooterBackgroundColor: "#fefadf", // 30% black
     dateCircle: {
       topText: "Tarehe",
       mainText: "09",
