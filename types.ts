@@ -1,4 +1,3 @@
-
 export interface DateCircleContent {
   topText: string;
   mainText: string;
@@ -18,7 +17,6 @@ export interface PosterState {
   paragraph: string;
   backgroundImage: string | null;
   backgroundStyle: BackgroundStyle;
-  backgroundOverlayColor: string;
   headerFooterBackgroundColor: string;
   dateCircle: DateCircleContent;
   topLeftLogo: string | null;

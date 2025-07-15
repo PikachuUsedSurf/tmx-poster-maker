@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PosterState, DateCircleContent, BackgroundStyle, ObjectFit } from '../types';
 import TextInput from './TextInput';
@@ -46,7 +45,7 @@ const ControlsPanel: React.FC<ControlsPanelProps> = ({
     <div className="space-y-4 text-gray-200">
       <h2 className="text-xl font-bold text-center text-teal-300 mb-6">Editing Controls</h2>
       
-      <Accordion title="AI Content Generator">
+      <Accordion title="Content Generator">
         <ContentGenerator onApplyContent={onContentUpdate} />
       </Accordion>
       
@@ -98,15 +97,6 @@ const ControlsPanel: React.FC<ControlsPanelProps> = ({
           onUpload={(url) => onStateChange('backgroundImage', url)}
           currentImage={posterState.backgroundImage}
         />
-        <div className="mt-2">
-            <label className="block text-sm font-medium text-gray-300 mb-1">Overlay Color</label>
-            <input
-                type="color"
-                value={posterState.backgroundOverlayColor.slice(0, 7)}
-                onChange={(e) => onStateChange('backgroundOverlayColor', `${e.target.value}B3`)} // Appends 70% opacity
-                className="w-full h-10 p-1 bg-gray-700 border border-gray-600 rounded-md cursor-pointer"
-            />
-        </div>
          <div className="mt-2">
             <label className="block text-sm font-medium text-gray-300 mb-1">Header/Footer Background Color</label>
             <input

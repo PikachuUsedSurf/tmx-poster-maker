@@ -1,4 +1,3 @@
-
 import React, { useState, useCallback } from 'react';
 import { PosterState, BackgroundStyle, DateCircleContent } from './types';
 import PosterCanvas from './components/PosterCanvas';
@@ -17,8 +16,7 @@ const App: React.FC = () => {
       objectFit: 'cover',
       objectPosition: 'center center',
     },
-    backgroundOverlayColor: "rgba(0, 77, 77, 0.7)",
-    headerFooterBackgroundColor: "#fefadf", // 30% black
+    headerFooterBackgroundColor: "#fefadf", // A light yellow color
     dateCircle: {
       topText: "Tarehe",
       mainText: "09",
@@ -30,7 +28,9 @@ const App: React.FC = () => {
       "./components/images/tmx.svg", // TMX PLC
       "./components/images/WRRB.png", // WRRB
       "./components/images/copra.png", // COPRA
+      "./components/images/TCDC.png", // CBT
       "./components/images/cbt.png", // TCDC
+      "./components/images/tcb.png", // TCB
     ],
   });
   

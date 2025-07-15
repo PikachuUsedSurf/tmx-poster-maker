@@ -1,6 +1,7 @@
-
 import React from 'react';
 import { PosterState } from '../types';
+
+const OVERLAY_IMAGE_URL = "./components/images/overlay.png";
 
 const PosterCanvas: React.FC<PosterState> = ({
   topText,
@@ -8,7 +9,6 @@ const PosterCanvas: React.FC<PosterState> = ({
   paragraph,
   backgroundImage,
   backgroundStyle,
-  backgroundOverlayColor,
   headerFooterBackgroundColor,
   dateCircle,
   topLeftLogo,
@@ -34,10 +34,14 @@ const PosterCanvas: React.FC<PosterState> = ({
         />
       )}
 
-      {/* Full Canvas Overlay */}
+      {/* Full Canvas Overlay Image */}
       <div 
         className="absolute inset-0 w-full h-full" 
-        style={{ backgroundColor: backgroundOverlayColor }}
+        style={{ 
+          backgroundImage: `url(${OVERLAY_IMAGE_URL})`,
+          mixBlendMode: 'normal',
+          opacity: 100
+        }}
       />
       
       {/* Header Section - Positioned Absolutely */}
@@ -76,7 +80,7 @@ const PosterCanvas: React.FC<PosterState> = ({
       
       {/* Footer Logos - Positioned Absolutely */}
       <footer 
-          className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-24 px-10 py-4 shadow-lg z-10"
+          className="absolute bottom-0 left-0 right-0 flex justify-center items-center gap-8 px-10 py-4 shadow-lg z-10"
           style={{ backgroundColor: headerFooterBackgroundColor }}
       >
           {footerLogos.map((logo, index) => (
