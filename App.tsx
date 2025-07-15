@@ -1,10 +1,9 @@
+
 import React, { useState, useCallback } from 'react';
+import html2canvas from 'html2canvas';
 import { PosterState, BackgroundStyle, DateCircleContent } from './types';
 import PosterCanvas from './components/PosterCanvas';
 import ControlsPanel from './components/ControlsPanel';
-
-// Declare html2canvas from the global scope
-declare const html2canvas: any;
 
 const App: React.FC = () => {
   const [posterState, setPosterState] = useState<PosterState>({
@@ -74,18 +73,23 @@ const App: React.FC = () => {
     const posterElement = document.getElementById('poster-canvas');
     if (posterElement) {
         setIsDownloading(true);
+
         html2canvas(posterElement, {
             width: 1000,
             height: 1000,
             scale: 1, // Use scale 1 for 1000x1000 output
             useCORS: true,
-            allowTaint: true,
             backgroundColor: null, // Use transparent background for canvas capture
         }).then((canvas: HTMLCanvasElement) => {
             const link = document.createElement('a');
             link.download = 'poster.png';
             link.href = canvas.toDataURL('image/png');
+            
+            // Append link to body, click, and remove for robust download triggering
+            document.body.appendChild(link);
             link.click();
+            document.body.removeChild(link);
+
             setIsDownloading(false);
         }).catch((err: any) => {
             console.error("Failed to download poster:", err);
