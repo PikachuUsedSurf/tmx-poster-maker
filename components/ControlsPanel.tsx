@@ -1,5 +1,5 @@
 import React from 'react';
-import { PosterState, DateCircleContent, BackgroundStyle, ObjectFit } from '../types';
+import { PosterState, DateCircleContent, BackgroundStyle, } from '../types';
 import TextInput from './TextInput';
 import ImageUpload from './ImageUpload';
 import Accordion from './Accordion';

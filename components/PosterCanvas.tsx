@@ -40,7 +40,7 @@ const PosterCanvas: React.FC<PosterState> = ({
         style={{ 
           backgroundImage: `url(${OVERLAY_IMAGE_URL})`,
           mixBlendMode: 'normal',
-          opacity: 100
+          opacity: 75
         }}
       />
       
