@@ -22,9 +22,9 @@ const App: React.FC = () => {
       bottomText: "Julai\n2025",
     },
     topLeftLogo: "./components/images/cat.png", // Placeholder for Coat of Arms
-    topRightLogo: "./components/images/tmx.svg", // Placeholder for TMX PLC
+    topRightLogo: "./components/images/tmxlogo.png", // Placeholder for TMX PLC
     footerLogos: [
-      "./components/images/tmx.svg", // TMX PLC
+      "./components/images/tmxlogo.png", // TMX PLC
       "./components/images/WRRB.png", // WRRB
       "./components/images/copra.png", // COPRA
       "./components/images/TCDC.png", // CBT
@@ -73,27 +73,46 @@ const App: React.FC = () => {
     const posterElement = document.getElementById('poster-canvas');
     if (posterElement) {
         setIsDownloading(true);
+        
+        // To ensure consistent rendering across devices, we create a temporary,
+        // off-screen element with a fixed size (1000x1000px) for html2canvas to use.
+        const container = document.createElement('div');
+        container.style.position = 'absolute';
+        container.style.left = '-9999px';
+        
+        // Clone the poster element to avoid affecting the one on screen.
+        const clone = posterElement.cloneNode(true) as HTMLElement;
+        
+        // Remove responsive Tailwind classes and apply fixed dimensions to the clone.
+        // This is the key to ensuring the downloaded poster is always 1000x1000px.
+        clone.style.width = '1000px';
+        clone.style.height = '1000px';
+        clone.style.maxWidth = 'none';
+        clone.style.aspectRatio = 'auto';
+        
+        container.appendChild(clone);
+        document.body.appendChild(container);
 
-        html2canvas(posterElement, {
-            width: 1000,
-            height: 1000,
-            scale: 1, // Use scale 1 for 1000x1000 output
+        html2canvas(clone, {
+            scale: 1, // We want a 1:1 capture of our 1000px element.
             useCORS: true,
-            backgroundColor: null, // Use transparent background for canvas capture
+            backgroundColor: null,
+            // By not specifying width/height here, html2canvas uses the element's
+            // own dimensions, which we have explicitly set to 1000x1000.
         }).then((canvas: HTMLCanvasElement) => {
             const link = document.createElement('a');
             link.download = 'poster.png';
             link.href = canvas.toDataURL('image/png');
             
-            // Append link to body, click, and remove for robust download triggering
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-
-            setIsDownloading(false);
         }).catch((err: any) => {
             console.error("Failed to download poster:", err);
             alert("An error occurred while downloading the poster. Check the console for details.");
+        }).finally(() => {
+            // Important: clean up the temporary container from the DOM.
+            document.body.removeChild(container);
             setIsDownloading(false);
         });
     }
