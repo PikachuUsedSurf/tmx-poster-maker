@@ -12,6 +12,7 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onApplyContent }) =
     const [locations, setLocations] = useState<string[]>([]);
     const [crop, setCrop] = useState<CropName | "">("");
     const [date, setDate] = useState("");
+    const [time, setTime] = useState("10:30");
     const [language, setLanguage] = useState<'sw' | 'en'>('sw');
     const [generated, setGenerated] = useState<Partial<PosterState> | null>(null);
 
@@ -35,11 +36,11 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onApplyContent }) =
     };
 
     const handleGenerate = () => {
-        if (locations.length === 0 || !crop || !date) {
-            alert("Please select at least one location, a crop, and a date.");
+        if (locations.length === 0 || !crop || !date || !time) {
+            alert("Please select at least one location, a crop, a date, and a time.");
             return;
         }
-        const content = generatePosterContent(locations, crop, date, language);
+        const content = generatePosterContent(locations, crop, date, time, language);
         setGenerated(content);
     };
 
@@ -105,15 +106,27 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onApplyContent }) =
                     })}
                 </div>
             </div>
-             <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1">Date</label>
-                <input
-                    type="date"
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}
-                    className="w-full p-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
-                    aria-label="Select auction date"
-                />
+             <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-1">Date</label>
+                    <input
+                        type="date"
+                        value={date}
+                        onChange={(e) => setDate(e.target.value)}
+                        className="w-full p-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                        aria-label="Select auction date"
+                    />
+                </div>
+                <div>
+                    <label className="block text-sm font-medium text-gray-300 mb-1">Time</label>
+                    <input
+                        type="time"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
+                        className="w-full p-2 bg-gray-700 border border-gray-600 rounded-md focus:ring-2 focus:ring-teal-500 focus:border-teal-500 transition-colors"
+                        aria-label="Select auction time"
+                    />
+                </div>
             </div>
             <button onClick={handleGenerate} className="w-full mt-2 p-2 bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors font-semibold">
                 Generate Poster Content

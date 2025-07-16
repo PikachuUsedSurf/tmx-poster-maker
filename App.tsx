@@ -34,8 +34,8 @@ const App: React.FC = () => {
       },
       mainText: {
         content: "09",
-        position: { x: 50, y: 50 },
-        downloadPosition: { x: 50, y: 30 },
+        position: { x: 50, y: 35 },
+        downloadPosition: { x: 50, y: 35 },
       },
       bottomText: {
         content: "Julai\n2025",
