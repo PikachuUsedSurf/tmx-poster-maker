@@ -123,11 +123,11 @@ const ContentGenerator: React.FC<ContentGeneratorProps> = ({ onApplyContent }) =
                     <h4 className="text-lg font-bold text-teal-300">Generated Content Preview</h4>
                     <div>
                         <label className="text-sm font-semibold text-gray-400" id="generated-heading-label">Heading</label>
-                        <p className="p-2 bg-gray-700 rounded-md text-sm mt-1" aria-labelledby="generated-heading-label">{generated.heading}</p>
+                        <p className="p-2 bg-gray-700 rounded-md text-sm mt-1" aria-labelledby="generated-heading-label">{generated.heading?.content}</p>
                     </div>
                      <div>
                         <label className="text-sm font-semibold text-gray-400" id="generated-paragraph-label">Paragraph</label>
-                        <p className="p-2 bg-gray-700 rounded-md text-sm mt-1 whitespace-pre-wrap" aria-labelledby="generated-paragraph-label">{generated.paragraph}</p>
+                        <p className="p-2 bg-gray-700 rounded-md text-sm mt-1 whitespace-pre-wrap" aria-labelledby="generated-paragraph-label">{generated.paragraph?.content}</p>
                     </div>
                     <button onClick={handleApply} className="w-full mt-2 p-2 bg-green-600 hover:bg-green-700 rounded-md transition-colors font-semibold">
                         Apply to Poster

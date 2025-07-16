@@ -1,4 +1,4 @@
-import { PosterState, DateCircleContent } from '../../types';
+import { PosterState, PositionableElement } from '../../types';
 import { CropName, CROP_TRANSLATIONS_SW, CROP_NAMES_EN, ORGANIZATION_MAP, LOGO_URL_MAP } from './constants';
 
 const toCamelCase = (str: string): string => {
@@ -21,33 +21,30 @@ export const generatePosterContent = (locations: string[], crop: CropName, date:
     const organizations = ORGANIZATION_MAP[crop] || [];
     const formattedOrganizations = formatList(organizations, lang);
     
-    // Use UTC date to avoid timezone issues with date-only strings
     const dateObj = new Date(date + 'T12:00:00Z'); 
     
-    // Date parts
     const day = dateObj.toLocaleDateString("en-GB", { day: '2-digit' });
     const swahiliMonth = dateObj.toLocaleDateString("sw-TZ", { month: 'long' });
     const englishMonth = dateObj.toLocaleDateString("en-US", { month: 'long' });
     const year = dateObj.getFullYear();
     const swahiliWeekday = dateObj.toLocaleDateString("sw-TZ", { weekday: 'long' });
     const englishWeekday = dateObj.toLocaleDateString("en-US", { weekday: 'long' });
-    const fullDateGB = dateObj.toLocaleDateString("en-GB"); // DD/MM/YYYY
+    const fullDateGB = dateObj.toLocaleDateString("en-GB");
 
-    // Content variables
     let topText: string;
     let heading: string;
     let paragraph: string;
-    let dateCircle: DateCircleContent;
+    let dateCircleContent: { topText: PositionableElement, mainText: PositionableElement, bottomText: PositionableElement };
 
     if (lang === 'sw') {
         const cropSwahili = CROP_TRANSLATIONS_SW[crop];
         topText = `JAMHURI YA MUUNGANO WA TANZANIA\nWIZARA YA FEDHA\nSOKO LA BIDHAA TANZANIA`;
         heading = cropSwahili.toUpperCase();
         paragraph = `TMX, ${formattedOrganizations} na Serikali ya Mikoa ya ${formattedLocations} Zinawataarifu Wanunuzi na Wadau wote kushiriki mnada wa zao la ${cropSwahili.toLowerCase()} Mikoa ya ${formattedLocations}.\n\nMnada utafanyika ${swahiliWeekday}, tarehe ${fullDateGB} Kuanzia saa Nne na nusu Asubuhi Kwa njia ya kielektroniki.\n\nKaribuni wote`;
-        dateCircle = {
-            topText: "Tarehe",
-            mainText: day,
-            bottomText: `${swahiliMonth}\n${year}`,
+        dateCircleContent = {
+            topText: { content: "Tarehe", position: { x: 0, y: 0 } },
+            mainText: { content: day, position: { x: 0, y: 0 } },
+            bottomText: { content: `${swahiliMonth}\n${year}`, position: { x: 0, y: 0 } },
         };
     } else { // lang === 'en'
         const cropEnglish = CROP_NAMES_EN[crop];
@@ -56,23 +53,26 @@ export const generatePosterContent = (locations: string[], crop: CropName, date:
         topText = `THE UNITED REPUBLIC OF TANZANIA\nMINISTRY OF FINANCE\nTANZANIA MERCANTILE EXCHANGE`;
         heading = cropEnglish.toUpperCase();
         paragraph = `TMX, ${formattedOrganizations} and the Regional Government of ${formattedLocations} invite all Buyers and Stakeholders to participate in the ${cropEnglish.toLowerCase()} auction from the ${formattedLocations} ${regionText}.\n\nThe auction will be held electronically on ${englishWeekday}, ${fullDateGB}, starting at 10:30 AM.\n\nAll are welcome`;
-        dateCircle = {
-            topText: "Date",
-            mainText: day,
-            bottomText: `${englishMonth}\n${year}`,
+        dateCircleContent = {
+            topText: { content: "Date", position: { x: 0, y: 0 } },
+            mainText: { content: day, position: { x: 0, y: 0 } },
+            bottomText: { content: `${englishMonth}\n${year}`, position: { x: 0, y: 0 } },
         };
     }
 
     const footerLogos = [
         LOGO_URL_MAP["TMX"],
         ...organizations.map(org => LOGO_URL_MAP[org]).filter(Boolean)
-    ].filter((value, index, self) => self.indexOf(value) === index); // Ensure unique logos
+    ].filter((value, index, self) => self.indexOf(value) === index);
 
     return {
         topText,
-        heading,
-        paragraph,
-        dateCircle,
+        heading: { content: heading, position: {x:0, y:0} }, // Position is a dummy, will be ignored
+        paragraph: { content: paragraph, position: {x:0, y:0} }, // Position is a dummy, will be ignored
+        dateCircle: {
+            ...dateCircleContent,
+            position: {x:0, y:0} // Position is a dummy, will be ignored
+        },
         footerLogos,
     };
 }

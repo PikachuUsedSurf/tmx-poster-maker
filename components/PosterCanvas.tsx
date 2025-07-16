@@ -1,9 +1,15 @@
 import React from 'react';
-import { PosterState } from '../types';
+import { PosterState, Position } from '../types';
 
 const OVERLAY_IMAGE_URL = "./components/images/overlay.png";
 
-const PosterCanvas: React.FC<PosterState> = ({
+interface PosterCanvasProps extends PosterState {
+  id: string;
+  useDownloadLayout?: boolean;
+}
+
+const PosterCanvas: React.FC<PosterCanvasProps> = ({
+  id,
   topText,
   heading,
   paragraph,
@@ -14,11 +20,27 @@ const PosterCanvas: React.FC<PosterState> = ({
   topLeftLogo,
   topRightLogo,
   footerLogos,
+  useDownloadLayout = false,
 }) => {
+  const getPos = (
+    element: { position: Position; downloadPosition?: Position }
+  ): Position => {
+    return (useDownloadLayout && element.downloadPosition)
+      ? element.downloadPosition
+      : element.position;
+  };
+
+  const headingPos = getPos(heading);
+  const paragraphPos = getPos(paragraph);
+  const dateCirclePos = getPos(dateCircle);
+  const dateCircleTopTextPos = getPos(dateCircle.topText);
+  const dateCircleMainTextPos = getPos(dateCircle.mainText);
+  const dateCircleBottomTextPos = getPos(dateCircle.bottomText);
+
   return (
     <div
-      id="poster-canvas"
-      className="w-full max-w-[1000px] aspect-square bg-[#002f2f] relative overflow-hidden shadow-2xl text-white"
+      id={id}
+      className="w-full h-full bg-[#002f2f] relative overflow-hidden shadow-2xl text-white"
     >
       {/* Background Image */}
       {backgroundImage && (
@@ -40,7 +62,7 @@ const PosterCanvas: React.FC<PosterState> = ({
         style={{ 
           backgroundImage: `url(${OVERLAY_IMAGE_URL})`,
           mixBlendMode: 'normal',
-          opacity: 75
+          opacity: 1
         }}
       />
       
@@ -60,22 +82,65 @@ const PosterCanvas: React.FC<PosterState> = ({
         </div>
       </header>
 
-      {/* Body Section - Padded to avoid header/footer */}
-      <main className="relative w-full h-full flex flex-col justify-center items-start z-0 px-10 box-border pt-[120px] pb-[120px]">
-          {/* This container preserves the inner layout of the text and date circle */}
-          <div className="relative w-full flex-grow flex flex-col justify-center items-start">
-            <div className="absolute top-0 left-0 translate-y-1/2 z-20">
-              <div className="bg-[#009A9A] rounded-full w-[200px] h-[200px] flex flex-col justify-center items-center text-center p-4 shadow-lg">
-                <span className="text-lg font-medium">{dateCircle.topText}</span>
-                <span className="text-7xl font-bold leading-none my-1">{dateCircle.mainText}</span>
-                <span className="text-lg font-medium whitespace-pre-wrap">{dateCircle.bottomText}</span>
+      {/* Body Section - Container for absolutely positioned elements */}
+      <main className="absolute top-0 left-0 w-full h-full z-0">
+          
+          {/* Date Circle Wrapper - Positioned via props */}
+          <div
+            className="absolute z-20"
+            style={{
+              top: `${dateCirclePos.y}%`,
+              left: `${dateCirclePos.x}%`,
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <div className="bg-[#009A9A] rounded-full w-[200px] h-[200px] text-center p-4 shadow-lg relative">
+              {/* Positionable text elements inside the circle */}
+              <div
+                className="absolute text-lg font-medium w-full"
+                style={{ top: `${dateCircleTopTextPos.y}%`, left: `${dateCircleTopTextPos.x}%`, transform: 'translate(-50%, -50%)' }}
+              >
+                  {dateCircle.topText.content}
+              </div>
+               <div
+                className="absolute text-7xl font-bold leading-none my-1 w-full"
+                style={{ top: `${dateCircleMainTextPos.y}%`, left: `${dateCircleMainTextPos.x}%`, transform: 'translate(-50%, -50%)' }}
+              >
+                  {dateCircle.mainText.content}
+              </div>
+              <div
+                className="absolute text-lg font-medium whitespace-pre-wrap w-full"
+                style={{ top: `${dateCircleBottomTextPos.y}%`, left: `${dateCircleBottomTextPos.x}%`, transform: 'translate(-50%, -50%)' }}
+              >
+                 {dateCircle.bottomText.content}
               </div>
             </div>
-            <div className="pl-[10px] pt-[300px] w-full">
-              <h1 className="text-8xl font-extrabold tracking-wider">{heading}</h1>
-              <p className="mt-6 text-2xl text-justify max-w-4xl whitespace-pre-wrap leading-relaxed">{paragraph}</p>
-            </div>
           </div>
+
+          {/* Heading - Positioned via props */}
+          <div
+            className="absolute"
+            style={{
+              top: `${headingPos.y}%`,
+              left: `${headingPos.x}%`,
+              width: `calc(95% - ${headingPos.x}%)`,
+            }}
+          >
+            <h1 className="text-8xl font-extrabold tracking-wider">{heading.content}</h1>
+          </div>
+          
+          {/* Paragraph - Positioned via props */}
+          <div
+            className="absolute"
+            style={{
+              top: `${paragraphPos.y}%`,
+              left: `${paragraphPos.x}%`,
+              width: `calc(95% - ${paragraphPos.x}%)`,
+            }}
+          >
+            <p className="text-2xl text-justify max-w-4xl whitespace-pre-wrap leading-relaxed">{paragraph.content}</p>
+          </div>
+
       </main>
       
       {/* Footer Logos - Positioned Absolutely */}
