@@ -71,7 +71,7 @@ const ControlsPanel: React.FC<ControlsPanelProps> = ({
     <div className="space-y-4 text-gray-200">
       <h2 className="text-xl font-bold text-center text-teal-300 mb-6">Editing Controls</h2>
       
-      <Accordion title="AI Content Generator">
+      <Accordion title="Content Generator">
         <ContentGenerator onApplyContent={onContentUpdate} />
       </Accordion>
       
@@ -261,4 +261,3 @@ const ControlsPanel: React.FC<ControlsPanelProps> = ({
 };
 
 export default ControlsPanel;
-  

@@ -16,7 +16,7 @@ const App: React.FC = () => {
     paragraph: {
       content: "TMX, COPRA, WRRB, TCDC na Serikali ya Mikoa ya Singida na Dodoma Zinawataarifu Wanunuzi na Wadau wote kushiriki mnada wa zao la DENGU Mikoa ya Singida na Dodoma.\n\nMnada utafanyika Jumatano, tarehe 09/07/2025 Kuanzia saa Nne na nusu Asubuhi Kwa njia ya kielektroniki.\n\nKaribuni wote",
       position: { x: 5, y: 68 },
-      downloadPosition: { x: 5, y: 60 },
+      downloadPosition: { x: 5, y: 57 },
     },
     backgroundImage: "https://i.imgur.com/G5GYDPh.jpeg",
     backgroundStyle: {
