@@ -35,12 +35,12 @@ const App: React.FC = () => {
       mainText: {
         content: "09",
         position: { x: 50, y: 35 },
-        downloadPosition: { x: 50, y: 35 },
+        downloadPosition: { x: 50, y: 30 },
       },
       bottomText: {
         content: "Julai\n2025",
         position: { x: 50, y: 80 },
-        downloadPosition: { x: 50, y: 80 },
+        downloadPosition: { x: 50, y: 75 },
       },
     },
     topLeftLogo: "./components/images/cat.png", // Placeholder for Coat of Arms

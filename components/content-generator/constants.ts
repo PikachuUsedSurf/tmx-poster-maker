@@ -55,11 +55,11 @@ export const ORGANIZATION_MAP: Record<CropName, string[]> = {
 };
 
 export const LOGO_URL_MAP: Record<string, string> = {
-    "TMX": "https://i.imgur.com/e3sYVjB.png", // TMX PLC
-    "WRRB": "https://i.imgur.com/bQyB04S.png", // WRRB
-    "COPRA": "https://i.imgur.com/v1TjWfA.png", // COPRA
-    "TCDC": "https://i.imgur.com/Oq1S8xa.png", // TCDC
-    "TCB": "https://i.imgur.com/gH3Yc2G.png", // Tanzania Coffee Board (placeholder)
-    "CBT": "https://i.imgur.com/5J3sN4P.png", // Cashew Board of Tanzania (placeholder)
-    "MC": "https://i.imgur.com/QyZZaP8.png", // Mining commision (placeholder)
+    "TMX": "./components/tmxlogo2.png", // TMX PLC
+    "WRRB": "./components/WRRB.png", // WRRB
+    "COPRA": "./components/copra.png", // COPRA
+    "TCDC": "./components/tcdc.png", // TCDC
+    "TCB": "./components/tcb.png", // Tanzania Coffee Board (placeholder)
+    "CBT": "./components/cbt.png", // Cashew Board of Tanzania (placeholder)
+    "MC": "./mc", // Mining commision (placeholder)
 };

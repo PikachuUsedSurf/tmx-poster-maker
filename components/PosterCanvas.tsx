@@ -1,5 +1,5 @@
 import React from 'react';
-import { PosterState, Position } from '../types';
+import { PosterState, Position, PositionableElement } from '../types';
 
 const OVERLAY_IMAGE_URL = "./components/images/overlay.png";
 
@@ -7,6 +7,22 @@ interface PosterCanvasProps extends PosterState {
   id: string;
   useDownloadLayout?: boolean;
 }
+
+const renderRichText = (text: PositionableElement['content']) => {
+    if (typeof text !== 'string') {
+        return text;
+    }
+    // This regex splits the string by the bold markers (**...**), keeping the markers.
+    const parts = text.split(/(\*\*.+?\*\*)/g);
+
+    return parts.map((part, i) => {
+        if (part.startsWith('**') && part.endsWith('**')) {
+            return <strong key={i}>{part.slice(2, -2)}</strong>;
+        }
+        return <React.Fragment key={i}>{part}</React.Fragment>;
+    });
+};
+
 
 const PosterCanvas: React.FC<PosterCanvasProps> = ({
   id,
@@ -138,7 +154,7 @@ const PosterCanvas: React.FC<PosterCanvasProps> = ({
               width: `calc(95% - ${paragraphPos.x}%)`,
             }}
           >
-            <p className="text-2xl text-justify max-w-4xl whitespace-pre-wrap leading-relaxed">{paragraph.content}</p>
+            <p className="text-2xl text-justify max-w-4xl whitespace-pre-wrap leading-relaxed">{renderRichText(paragraph.content)}</p>
           </div>
 
       </main>

@@ -88,7 +88,7 @@ export const generatePosterContent = (locations: string[], crop: CropName, date:
         const cropSwahili = CROP_TRANSLATIONS_SW[crop];
         topText = `JAMHURI YA MUUNGANO WA TANZANIA\nWIZARA YA FEDHA\nSOKO LA BIDHAA TANZANIA`;
         heading = cropSwahili.toUpperCase();
-        paragraph = `TMX, ${formattedOrganizations} na Serikali ya Mikoa ya ${formattedLocations} Zinawataarifu Wanunuzi na Wadau wote kushiriki mnada wa zao la ${cropSwahili.toLowerCase()} Mikoa ya ${formattedLocations}.\n\nMnada utafanyika ${swahiliWeekday}, tarehe ${fullDateGB} Kuanzia ${formattedTime} Kwa njia ya kielektroniki.\n\nKaribuni wote`;
+        paragraph = `TMX, ${formattedOrganizations} na Serikali ya Mikoa ya **${formattedLocations}** Zinawataarifu Wanunuzi na Wadau wote kushiriki mnada wa zao la ${cropSwahili.toLowerCase()} Mikoa ya **${formattedLocations}**.\n\nMnada utafanyika **${swahiliWeekday}**, tarehe **${fullDateGB}** Kuanzia **${formattedTime}** Kwa njia ya kielektroniki.\n\nKaribuni wote`;
         dateCircleContent = {
             topText: { content: "Tarehe", position: { x: 0, y: 0 } },
             mainText: { content: day, position: { x: 0, y: 0 } },
@@ -100,7 +100,7 @@ export const generatePosterContent = (locations: string[], crop: CropName, date:
         
         topText = `THE UNITED REPUBLIC OF TANZANIA\nMINISTRY OF FINANCE\nTANZANIA MERCANTILE EXCHANGE`;
         heading = cropEnglish.toUpperCase();
-        paragraph = `TMX, ${formattedOrganizations} and the Regional Government of ${formattedLocations} invite all Buyers and Stakeholders to participate in the ${cropEnglish.toLowerCase()} auction from the ${formattedLocations} ${regionText}.\n\nThe auction will be held electronically on ${englishWeekday}, ${fullDateGB}, starting at ${formattedTime}.\n\nAll are welcome`;
+        paragraph = `TMX, ${formattedOrganizations} and the Regional Government of **${formattedLocations}** invite all Buyers and Stakeholders to participate in the ${cropEnglish.toLowerCase()} auction from the **${formattedLocations}** ${regionText}.\n\nThe auction will be held electronically on **${englishWeekday}**, **${fullDateGB}**, starting at **${formattedTime}**.\n\nAll are welcome`;
         dateCircleContent = {
             topText: { content: "Date", position: { x: 0, y: 0 } },
             mainText: { content: day, position: { x: 0, y: 0 } },
